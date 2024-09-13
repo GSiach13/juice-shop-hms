@@ -6,8 +6,8 @@
 import frisby = require('frisby')
 
 const jsonHeader = { 'content-type': 'application/json' }
-const BASE_URL = 'http://localhost:3000'
-const REST_URL = 'http://localhost:3000/rest'
+const BASE_URL = 'http://localhost:3001'
+const REST_URL = 'http://localhost:3001/rest'
 
 describe('/dataerasure', () => {
   it('GET erasure form for logged-in users includes their email and security question', () => {

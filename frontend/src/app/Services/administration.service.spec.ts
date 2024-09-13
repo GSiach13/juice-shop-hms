@@ -24,7 +24,7 @@ describe('AdministrationService', () => {
     fakeAsync((service: AdministrationService, httpMock: HttpTestingController) => {
       let res: any
       service.getApplicationVersion().subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/admin/application-version')
+      const req = httpMock.expectOne('http://localhost:3001/rest/admin/application-version')
       req.flush({ version: 'apiResponse' })
       tick()
 

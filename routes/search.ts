@@ -10,15 +10,13 @@ class ErrorWithParent extends Error {
   parent: Error | undefined
 }
 
+// vuln-code-snippet start unionSqlInjectionChallenge dbSchemaChallenge
 module.exports = function searchProducts () {
   return (req: Request, res: Response, next: NextFunction) => {
     let criteria: any = req.query.q === 'undefined' ? '' : req.query.q ?? ''
     criteria = (criteria.length <= 200) ? criteria : criteria.substring(0, 200)
-
-    // Use parameterized queries to prevent SQL injection
-    const query = `SELECT * FROM Products WHERE ((name LIKE :searchTerm OR description LIKE :searchTerm) AND deletedAt IS NULL) ORDER BY name`;
-    const replacements = { searchTerm: `%${criteria}%` };
-
+    const query = `SELECT * FROM Products WHERE ((name LIKE :criteria OR description LIKE :criteria) AND deletedAt IS NULL) ORDER BY name`
+    const replacements = { criteria: `%${criteria}%` }
     models.sequelize.query(query, { replacements })
       .then(([products]: any) => {
         const dataString = JSON.stringify(products)
@@ -70,3 +68,5 @@ module.exports = function searchProducts () {
       })
   }
 }
+
+// vuln-code-snippet end unionSqlInjectionChallenge dbSchemaChallenge

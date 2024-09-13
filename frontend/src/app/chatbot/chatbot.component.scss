@@ -77,7 +77,7 @@ mat-form-field {
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
+    background: #b30010;
   }
 }
 
@@ -110,7 +110,7 @@ mat-form-field {
     border-left: 20px solid transparent;
     border-top: 20px solid rgb(84, 110, 122);
     bottom: -20px;
-    content: '';
+    content: "";
     position: absolute;
     right: 20px;
   }
@@ -131,7 +131,7 @@ mat-form-field {
     border-right: 20px solid transparent;
     border-top: 20px solid rgb(84, 110, 122);
     bottom: -20px;
-    content: '';
+    content: "";
     left: 20px;
     position: absolute;
   }

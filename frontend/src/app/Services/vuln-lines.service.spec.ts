@@ -18,7 +18,7 @@ describe('VulnLinesService', () => {
     fakeAsync((service: VulnLinesService, httpMock: HttpTestingController) => {
       let res: any
       service.check('testChallenge', [1, 2]).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/snippets/verdict')
+      const req = httpMock.expectOne('http://localhost:3001/snippets/verdict')
       req.flush('apiResponse')
 
       tick()

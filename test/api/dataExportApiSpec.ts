@@ -11,7 +11,7 @@ import path from 'path'
 const fs = require('fs')
 
 const jsonHeader = { 'content-type': 'application/json' }
-const REST_URL = 'http://localhost:3000/rest'
+const REST_URL = 'http://localhost:3001/rest'
 
 describe('/rest/user/data-export', () => {
   it('Export data without use of CAPTCHA', () => {

@@ -5,21 +5,21 @@ on:
       - l10n_develop
       - gh-pages
     paths-ignore:
-      - '*.md'
-      - 'LICENSE'
-      - 'monitoring/grafana-dashboard.json'
-      - 'screenshots/**'
+      - "*.md"
+      - "LICENSE"
+      - "monitoring/grafana-dashboard.json"
+      - "screenshots/**"
     tags-ignore:
-      - '*'
+      - "*"
   pull_request:
     paths-ignore:
-      - '*.md'
-      - 'LICENSE'
-      - 'data/static/i18n/*.json'
-      - 'frontend/src/assets/i18n/*.json'
+      - "*.md"
+      - "LICENSE"
+      - "data/static/i18n/*.json"
+      - "frontend/src/assets/i18n/*.json"
 env:
   ANGULAR_CLI_VERSION: 15
-  CYCLONEDX_NPM_VERSION: '^1.12.0'
+  CYCLONEDX_NPM_VERSION: "^1.12.0"
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -231,7 +231,7 @@ jobs:
           install: false
           browser: ${{ matrix.browser }}
           start: npm start
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:3001
           record: true
           group: ${{ matrix.browser }} @ ${{ matrix.os }}
         env:
@@ -245,7 +245,7 @@ jobs:
           install: false
           browser: ${{ matrix.browser }}
           start: npm start
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:3001
           record: true
           group: ${{ matrix.browser }} @ ${{ matrix.os }}
         env:
@@ -285,7 +285,7 @@ jobs:
           npm start &
           cd ../..
           chmod +x test/smoke/smoke-test.sh
-          test/smoke/smoke-test.sh http://localhost:3000
+          test/smoke/smoke-test.sh http://localhost:3001
   docker-test:
     runs-on: ubuntu-latest
     steps:

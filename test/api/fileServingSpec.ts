@@ -8,7 +8,7 @@ import config from 'config'
 import { type Product } from '../../data/types'
 const utils = require('../../lib/utils')
 
-const URL = 'http://localhost:3000'
+const URL = 'http://localhost:3001'
 
 let blueprint: string
 

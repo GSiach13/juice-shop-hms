@@ -11,7 +11,7 @@ const Joi = frisby.Joi
 const security = require('../../lib/insecurity')
 const http = require('http')
 
-const REST_URL = 'http://localhost:3000/rest'
+const REST_URL = 'http://localhost:3001/rest'
 
 const jsonHeader = { 'content-type': 'application/json' }
 const authHeader = { Authorization: `Bearer ${security.authorize()}`, 'content-type': 'application/json' }

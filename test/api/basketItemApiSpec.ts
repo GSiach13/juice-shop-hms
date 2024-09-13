@@ -7,8 +7,8 @@ import frisby = require('frisby')
 import { expect } from '@jest/globals'
 import config from 'config'
 
-const API_URL = 'http://localhost:3000/api'
-const REST_URL = 'http://localhost:3000/rest'
+const API_URL = 'http://localhost:3001/api'
+const REST_URL = 'http://localhost:3001/rest'
 
 const jsonHeader = { 'content-type': 'application/json' }
 let authHeader: { Authorization: string, 'content-type': string }

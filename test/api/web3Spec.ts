@@ -6,7 +6,7 @@
 import frisby = require('frisby')
 import { Joi } from 'frisby'
 
-const REST_URL = 'http://localhost:3000/rest/web3'
+const REST_URL = 'http://localhost:3001/rest/web3'
 
 describe('/submitKey', () => {
   it('POST missing key in request body gets rejected as non-Ethereum key', () => {

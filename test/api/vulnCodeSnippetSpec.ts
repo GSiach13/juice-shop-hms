@@ -8,7 +8,7 @@ import frisby = require('frisby')
 import io from 'socket.io-client'
 const Joi = frisby.Joi
 
-const URL = 'http://localhost:3000'
+const URL = 'http://localhost:3001'
 
 describe('/snippets/:challenge', () => {
   it('GET code snippet retrieval for unknown challenge key throws error', () => {
@@ -37,7 +37,7 @@ describe('snippets/verdict', () => {
   let socket: SocketIOClient.Socket
 
   beforeEach(done => {
-    socket = io('http://localhost:3000', {
+    socket = io('http://localhost:3001', {
       reconnectionDelay: 0,
       forceNew: true
     })

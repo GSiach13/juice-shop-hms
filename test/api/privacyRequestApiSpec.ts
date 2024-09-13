@@ -7,7 +7,7 @@ import frisby = require('frisby')
 const Joi = frisby.Joi
 const security = require('../../lib/insecurity')
 
-const API_URL = 'http://localhost:3000/api'
+const API_URL = 'http://localhost:3001/api'
 
 const authHeader = { Authorization: 'Bearer ' + security.authorize(), 'content-type': 'application/json' }
 

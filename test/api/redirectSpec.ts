@@ -6,7 +6,7 @@
 import frisby = require('frisby')
 import config from 'config'
 
-const URL = 'http://localhost:3000'
+const URL = 'http://localhost:3001'
 
 describe('/redirect', () => {
   it('GET redirected to https://github.com/juice-shop/juice-shop when this URL is passed as "to" parameter', () => {

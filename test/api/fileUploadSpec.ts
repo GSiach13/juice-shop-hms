@@ -9,7 +9,7 @@ import path from 'path'
 const fs = require('fs')
 const utils = require('../../lib/utils')
 
-const URL = 'http://localhost:3000'
+const URL = 'http://localhost:3001'
 
 describe('/file-upload', () => {
   it('POST file valid PDF for client and API', () => {

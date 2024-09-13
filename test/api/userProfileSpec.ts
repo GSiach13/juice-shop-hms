@@ -6,7 +6,7 @@
 import frisby = require('frisby')
 import config from 'config'
 
-const URL = 'http://localhost:3000'
+const URL = 'http://localhost:3001'
 
 const jsonHeader = { 'content-type': 'application/json' }
 let authHeader: { Cookie: any }

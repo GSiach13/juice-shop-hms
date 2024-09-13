@@ -39,20 +39,20 @@ For a detailed introduction, full list of features and architecture overview ple
 ## Table of contents
 
 - [Setup](#setup)
-    - [From Sources](#from-sources)
-    - [Packaged Distributions](#packaged-distributions)
-    - [Docker Container](#docker-container)
-    - [Vagrant](#vagrant)
-    - [Amazon EC2 Instance](#amazon-ec2-instance)
-    - [Azure Container Instance](#azure-container-instance)
-    - [Google Compute Engine Instance](#google-compute-engine-instance)
-    - [Heroku](#heroku)
-    - [Gitpod](#gitpod)
+  - [From Sources](#from-sources)
+  - [Packaged Distributions](#packaged-distributions)
+  - [Docker Container](#docker-container)
+  - [Vagrant](#vagrant)
+  - [Amazon EC2 Instance](#amazon-ec2-instance)
+  - [Azure Container Instance](#azure-container-instance)
+  - [Google Compute Engine Instance](#google-compute-engine-instance)
+  - [Heroku](#heroku)
+  - [Gitpod](#gitpod)
 - [Demo](#demo)
 - [Documentation](#documentation)
-    - [Node.js version compatibility](#nodejs-version-compatibility)
-    - [Troubleshooting](#troubleshooting)
-    - [Official companion guide](#official-companion-guide)
+  - [Node.js version compatibility](#nodejs-version-compatibility)
+  - [Troubleshooting](#troubleshooting)
+  - [Official companion guide](#official-companion-guide)
 - [Contributing](#contributing)
 - [References](#references)
 - [Merchandise](#merchandise)
@@ -76,7 +76,7 @@ For a detailed introduction, full list of features and architecture overview ple
 3. Go into the cloned folder with `cd juice-shop`
 4. Run `npm install` (only has to be done before first start or when you change the source code)
 5. Run `npm start`
-6. Browse to <http://localhost:3000>
+6. Browse to <http://localhost:3001>
 
 ### Packaged Distributions
 
@@ -90,7 +90,7 @@ For a detailed introduction, full list of features and architecture overview ple
    [latest release](https://github.com/juice-shop/juice-shop/releases/latest)
 3. Unpack and `cd` into the unpacked folder
 4. Run `npm start`
-5. Browse to <http://localhost:3000>
+5. Browse to <http://localhost:3001>
 
 > Each packaged distribution includes some binaries for `sqlite3` and
 > `libxmljs` bound to the OS and node.js version which `npm install` was
@@ -100,16 +100,14 @@ For a detailed introduction, full list of features and architecture overview ple
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/bkimminich/juice-shop.svg)](https://hub.docker.com/r/bkimminich/juice-shop)
 ![Docker Stars](https://img.shields.io/docker/stars/bkimminich/juice-shop.svg)
-[![](https://images.microbadger.com/badges/image/bkimminich/juice-shop.svg)](https://microbadger.com/images/bkimminich/juice-shop
-"Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/version/bkimminich/juice-shop.svg)](https://microbadger.com/images/bkimminich/juice-shop
-"Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/bkimminich/juice-shop.svg)](https://microbadger.com/images/bkimminich/juice-shop "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/bkimminich/juice-shop.svg)](https://microbadger.com/images/bkimminich/juice-shop "Get your own version badge on microbadger.com")
 
 1. Install [Docker](https://www.docker.com)
 2. Run `docker pull bkimminich/juice-shop`
-3. Run `docker run --rm -p 3000:3000 bkimminich/juice-shop`
-4. Browse to <http://localhost:3000> (on macOS and Windows browse to
-   <http://192.168.99.100:3000> if you are using docker-machine instead of the native docker installation)
+3. Run `docker run --rm -p 3001:3001 bkimminich/juice-shop`
+4. Browse to <http://localhost:3001> (on macOS and Windows browse to
+   <http://192.168.99.100:3001> if you are using docker-machine instead of the native docker installation)
 
 ### Vagrant
 
@@ -136,7 +134,7 @@ yum update -y
 yum install -y docker
 service docker start
 docker pull bkimminich/juice-shop
-docker run -d -p 80:3000 bkimminich/juice-shop
+docker run -d -p 80:3001 bkimminich/juice-shop
 ```
 
 ### Azure Container Instance
@@ -147,8 +145,8 @@ docker run -d -p 80:3000 bkimminich/juice-shop
    and then choose _Bash_ (not PowerShell).
 2. Create a resource group by running `az group create --name <group name> --location <location name, e.g. "centralus">`
 3. Create a new container by
-   running `az container create --resource-group <group name> --name <container name> --image bkimminich/juice-shop --dns-name-label <dns name label> --ports 3000 --ip-address public`
-4. Your container will be available at `http://<dns name label>.<location name>.azurecontainer.io:3000`
+   running `az container create --resource-group <group name> --name <container name> --image bkimminich/juice-shop --dns-name-label <dns name label> --ports 3001 --ip-address public`
+4. Your container will be available at `http://<dns name label>.<location name>.azurecontainer.io:3001`
 
 ### Google Compute Engine Instance
 
@@ -160,14 +158,14 @@ docker run -d -p 80:3000 bkimminich/juice-shop
 gcloud compute instances create-with-container owasp-juice-shop-app --container-image bkimminich/juice-shop
 ```
 
-3. Create a firewall rule that allows inbound traffic to port 3000
+3. Create a firewall rule that allows inbound traffic to port 3001
 
 ```
-gcloud compute firewall-rules create juice-rule --allow tcp:3000
+gcloud compute firewall-rules create juice-rule --allow tcp:3001
 ```
 
 4. Your container is now running and available at
-   `http://<EXTERNAL_IP>:3000/`
+   `http://<EXTERNAL_IP>:3001/`
 
 ### Heroku
 
@@ -185,8 +183,8 @@ Heroku_ button will deploy your forked version of the application.
 Feel free to have a look at the latest version of OWASP Juice Shop:
 <http://demo.owasp-juice.shop>
 
-> This is a deployment-test and sneak-peek instance only! You are __not
-> supposed__ to use this instance for your own hacking endeavours! No
+> This is a deployment-test and sneak-peek instance only! You are **not
+> supposed** to use this instance for your own hacking endeavours! No
 > guaranteed uptime! Guaranteed stern looks if you break it!
 
 ## Documentation
@@ -201,15 +199,15 @@ OWASP Juice Shop officially supports the following versions of
 [node.js LTS schedule](https://github.com/nodejs/LTS) as close as possible. Docker images and packaged distributions are
 offered accordingly.
 
-| node.js | Supported               | Tested                                                    | [Packaged Distributions](#packaged-distributions) | [Docker images](#docker-container) from `master` | [Docker images](#docker-container) from `develop` |
-|:--------|:------------------------|:----------------------------------------------------------|:--------------------------------------------------|:-------------------------------------------------|:--------------------------------------------------|
-| 22.x    | :x:                     | :x:                                                       |                                                   |                                                  |                                                   |
-| 21.x    | ( :heavy_check_mark:  ) | :heavy_check_mark:                                        | Windows (`x64`), MacOS (`x64`), Linux (`x64`)     |                                                  |                                                   |
-| 20.x    | :heavy_check_mark:      | :heavy_check_mark:                                        | Windows (`x64`), MacOS (`x64`), Linux (`x64`)     | `latest` (`linux/amd64`, `linux/arm64`)          | `snapshot` (`linux/amd64`, `linux/arm64`)         |
-| 20.6.0  | :x:                     | :bug: https://github.com/angular/angular-cli/issues/25782 |                                                   |                                                  |                                                   |
-| 19.x    | ( :heavy_check_mark: )  | :x:                                                       |                                                   |                                                  |                                                   |
-| 18.x    | :heavy_check_mark:      | :heavy_check_mark:                                        | Windows (`x64`), MacOS (`x64`), Linux (`x64`)     |                                                  |                                                   |
-| <18.x   | :x:                     | :x:                                                       |                                                   |                                                  |                                                   |
+| node.js | Supported              | Tested                                                    | [Packaged Distributions](#packaged-distributions) | [Docker images](#docker-container) from `master` | [Docker images](#docker-container) from `develop` |
+| :------ | :--------------------- | :-------------------------------------------------------- | :------------------------------------------------ | :----------------------------------------------- | :------------------------------------------------ |
+| 22.x    | :x:                    | :x:                                                       |                                                   |                                                  |                                                   |
+| 21.x    | ( :heavy_check_mark: ) | :heavy_check_mark:                                        | Windows (`x64`), MacOS (`x64`), Linux (`x64`)     |                                                  |                                                   |
+| 20.x    | :heavy_check_mark:     | :heavy_check_mark:                                        | Windows (`x64`), MacOS (`x64`), Linux (`x64`)     | `latest` (`linux/amd64`, `linux/arm64`)          | `snapshot` (`linux/amd64`, `linux/arm64`)         |
+| 20.6.0  | :x:                    | :bug: https://github.com/angular/angular-cli/issues/25782 |                                                   |                                                  |                                                   |
+| 19.x    | ( :heavy_check_mark: ) | :x:                                                       |                                                   |                                                  |                                                   |
+| 18.x    | :heavy_check_mark:     | :heavy_check_mark:                                        | Windows (`x64`), MacOS (`x64`), Linux (`x64`)     |                                                  |                                                   |
+| <18.x   | :x:                    | :x:                                                       |                                                   |                                                  |                                                   |
 
 Juice Shop is automatically tested _only on the latest `.x` minor version_ of each node.js version mentioned above!
 There is no guarantee that older minor node.js releases will always work with Juice Shop!
@@ -268,10 +266,10 @@ Add it to our ever-growing list of [REFERENCES.md](REFERENCES.md) by forking and
 
 ## Merchandise
 
-* On [Spreadshirt.com](http://shop.spreadshirt.com/juiceshop) and
+- On [Spreadshirt.com](http://shop.spreadshirt.com/juiceshop) and
   [Spreadshirt.de](http://shop.spreadshirt.de/juiceshop) you can get some swag (Shirts, Hoodies, Mugs) with the official
   OWASP Juice Shop logo
-* On
+- On
   [StickerYou.com](https://www.stickeryou.com/products/owasp-juice-shop/794)
   you can get variants of the OWASP Juice Shop logo as single stickers to decorate your laptop with. They can also print
   magnets, iron-ons, sticker sheets and temporary tattoos.

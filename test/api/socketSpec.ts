@@ -9,7 +9,7 @@ describe('WebSocket', () => {
   let socket: SocketIOClient.Socket
 
   beforeEach(done => {
-    socket = io('http://localhost:3000', {
+    socket = io('http://localhost:3001', {
       reconnectionDelay: 0,
       forceNew: true
     })
