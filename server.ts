@@ -173,11 +173,12 @@ restoreOverwrittenFilesWithOriginals().then(() => {
     maxAge: 3600,
   }));  
   /* Security middleware */
-  app.use((req, res, next) => {
-    res.header("Content-Security-Policy", "frame-ancestors 'self';");
-    res.header("X-Frame-Options", "SAMEORIGIN");
-    next();
-  });
+  app.use(helmet.frameguard({ action: 'sameorigin' }));
+  app.use(helmet.contentSecurityPolicy({
+    directives: {
+      "frame-ancestors": ["'self'"]
+    }
+  }));
   // app.use(helmet.xssFilter()); // = no protection from persisted XSS via RESTful API
   app.disable('x-powered-by')
   app.use(featurePolicy({
