@@ -173,8 +173,6 @@ restoreOverwrittenFilesWithOriginals().then(() => {
     maxAge: 3600,
   }));  
   /* Security middleware */
-  app.use(helmet.noSniff())
-  app.use(helmet.frameguard())
   app.use((req, res, next) => {
     res.header("Content-Security-Policy", "frame-ancestors 'self';");
     res.header("X-Frame-Options", "SAMEORIGIN");
