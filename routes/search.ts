@@ -17,8 +17,11 @@ module.exports = function searchProducts () {
     criteria = (criteria.length <= 200) ? criteria : criteria.substring(0, 200)
     const query = `SELECT * FROM Products WHERE ((name LIKE :criteria OR description LIKE :criteria) AND deletedAt IS NULL) ORDER BY name`
     const replacements = { criteria: `%${criteria}%` }
-    models.sequelize.query(query, { replacements })
-      .then(([products]: any) => {
+    models.sequelize.query(query, {
+      replacements,
+      type: models.sequelize.QueryTypes.SELECT
+    })
+      .then((products: any) => {
         const dataString = JSON.stringify(products)
         if (challengeUtils.notSolved(challenges.unionSqlInjectionChallenge)) { // vuln-code-snippet hide-start
           let solved = true
@@ -41,7 +44,9 @@ module.exports = function searchProducts () {
         }
         if (challengeUtils.notSolved(challenges.dbSchemaChallenge)) {
           let solved = true
-          models.sequelize.query('SELECT sql FROM sqlite_master').then(([data]: any) => {
+          models.sequelize.query('SELECT sql FROM sqlite_master', {
+            type: models.sequelize.QueryTypes.SELECT
+          }).then((data: any) => {
             const tableDefinitions = utils.queryResultToJson(data)
             if (tableDefinitions.data?.length) {
               for (let i = 0; i < tableDefinitions.data.length; i++) {
@@ -57,7 +62,7 @@ module.exports = function searchProducts () {
               }
             }
           })
-        } 
+        }
         for (let i = 0; i < products.length; i++) {
           products[i].name = req.__(products[i].name)
           products[i].description = req.__(products[i].description)

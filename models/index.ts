@@ -1,7 +1,4 @@
-/*
- * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
- * SPDX-License-Identifier: MIT
- */
+import 'dotenv/config'
 
 import { AddressModelInit } from './address'
 import { BasketModelInit } from './basket'
@@ -24,11 +21,14 @@ import { SecurityQuestionModelInit } from './securityQuestion'
 import { UserModelInit } from './user'
 import { WalletModelInit } from './wallet'
 
-/* jslint node: true */
-
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('database', 'username', 'password', {
+const database = process.env.DATABASE_NAME
+const username = process.env.DATABASE_USERNAME
+const password = process.env.DATABASE_PASSWORD
+const storage = process.env.DATABASE_STORAGE
+
+const sequelize = new Sequelize(database, username, password, {
   dialect: 'sqlite',
   retry: {
     match: [/SQLITE_BUSY/],
@@ -36,9 +36,10 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     max: 5
   },
   transactionType: 'IMMEDIATE',
-  storage: 'data/juiceshop.sqlite',
+  storage,
   logging: false
 })
+
 AddressModelInit(sequelize)
 BasketModelInit(sequelize)
 BasketItemModelInit(sequelize)

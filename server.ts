@@ -162,23 +162,33 @@ restoreOverwrittenFilesWithOriginals().then(() => {
 
   /* Bludgeon solution for possible CORS problems: Allow everything! */
   // SOLUTION FOR CORS ALLEGEDLY
-  // app.options('*', cors())
-  // app.use(cors())
-  const allowedOrigins = ['45.139.213.102']; // Add your allowed origins here
-  const corsOptions = {
-    origin: (origin: string, callback: any) => {
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-  };
-  
-  app.options('*', cors(corsOptions));
-  app.use(cors(corsOptions));
+  app.options('*', cors())
+  app.use(cors())
+  // const allowedOrigins = ['45.139.213.102']; // Add your allowed origins here
+  // const corsOptions = {
+  //   origin: (origin: string, callback: any) => {
+  //     if (allowedOrigins.includes(origin)) {
+  //       callback(null, true);
+  //     } else {
+  //       callback(new Error('Not allowed by CORS'));
+  //     }
+  //   },
+  // };
+  // app.options('*', cors(corsOptions));
+  // app.use(cors(corsOptions));
   /* Security middleware */
   app.use(helmet.noSniff())
+  app.use(helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: []
+    }
+  }))
+
   app.use(helmet.frameguard())
   // app.use(helmet.xssFilter()); // = no protection from persisted XSS via RESTful API
   app.disable('x-powered-by')
