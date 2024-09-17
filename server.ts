@@ -182,7 +182,7 @@ restoreOverwrittenFilesWithOriginals().then(() => {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https:", "https://cdnjs.cloudflare.com"],  // Allow styles from HTTPS and Cloudflare's CDN.
       imgSrc: ["'self'", "data:"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: []
