@@ -181,9 +181,9 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https:", "https://cdnjs.cloudflare.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https:", "https://cdnjs.cloudflare.com"],  // Allow styles from HTTPS and Cloudflare's CDN.
-      imgSrc: ["'self'", "data:"],
+      imgSrc: ["'self'", "data:", "https:", "https://cdnjs.cloudflare.com"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: []
     }
