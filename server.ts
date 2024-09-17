@@ -180,14 +180,21 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.use(helmet.noSniff())
   app.use(helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https:", "https://cdnjs.cloudflare.com"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https:", "https://cdnjs.cloudflare.com"],  // Allow styles from HTTPS and Cloudflare's CDN.
-      imgSrc: ["'self'", "data:", "https:", "https://cdnjs.cloudflare.com"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: []
+      defaultSrc: ["'self'", "*", "data:", "blob:"],  // Allow loading resources from any origin, data URIs, and blobs.
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:", "*"],  // Allow inline scripts, eval, and any script from HTTPS or any origin.
+      styleSrc: ["'self'", "'unsafe-inline'", "https:", "*"],  // Allow inline styles and styles from any HTTPS or any origin.
+      imgSrc: ["'self'", "data:", "blob:", "*"],  // Allow images from any origin, data URIs, and blobs.
+      connectSrc: ["'self'", "https:", "*", "wss:"],  // Allow WebSocket connections, HTTPS, and any origin.
+      fontSrc: ["'self'", "https:", "data:", "*"],  // Allow fonts from any origin, HTTPS, or data URIs.
+      frameSrc: ["'self'", "https:", "*"],  // Allow iframes from any origin or HTTPS.
+      objectSrc: ["'self'", "*"],  // Allow objects from any origin.
+      mediaSrc: ["'self'", "https:", "*"],  // Allow media from any origin or HTTPS.
+      workerSrc: ["'self'", "blob:", "*"],  // Allow workers from any origin and blobs.
+      formAction: ["'self'", "https:", "*"],  // Allow form submissions to any HTTPS or origin.
+      frameAncestors: ["'self'", "*"],  // Allow embedding the page in frames from any origin.
+      upgradeInsecureRequests: [],  // Keep automatic upgrade to HTTPS where applicable.
     }
-  }))
+  }));
 
   app.use(helmet.frameguard())
   // app.use(helmet.xssFilter()); // = no protection from persisted XSS via RESTful API
