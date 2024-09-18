@@ -161,42 +161,15 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.use(compression())
 
   /* Bludgeon solution for possible CORS problems: Allow everything! */
-  // SOLUTION FOR CORS ALLEGEDLY
   app.options('*', cors())
   app.use(cors())
-  // const allowedOrigins = ['45.139.213.102']; // Add your allowed origins here
-  // const corsOptions = {
-  //   origin: (origin: string, callback: any) => {
-  //     if (allowedOrigins.includes(origin)) {
-  //       callback(null, true);
-  //     } else {
-  //       callback(new Error('Not allowed by CORS'));
-  //     }
-  //   },
-  // };
-  // app.options('*', cors(corsOptions));
-  // app.use(cors(corsOptions));
   /* Security middleware */
   app.use(helmet.noSniff())
-  app.use(helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'", "*", "data:", "blob:"],  // Allow loading resources from any origin, data URIs, and blobs.
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:", "*"],  // Allow inline scripts, eval, and any script from HTTPS or any origin.
-      styleSrc: ["'self'", "'unsafe-inline'", "https:", "*"],  // Allow inline styles and styles from any HTTPS or any origin.
-      imgSrc: ["'self'", "data:", "blob:", "*"],  // Allow images from any origin, data URIs, and blobs.
-      connectSrc: ["'self'", "https:", "*", "wss:"],  // Allow WebSocket connections, HTTPS, and any origin.
-      fontSrc: ["'self'", "https:", "data:", "*"],  // Allow fonts from any origin, HTTPS, or data URIs.
-      frameSrc: ["'self'", "https:", "*"],  // Allow iframes from any origin or HTTPS.
-      objectSrc: ["'self'", "*"],  // Allow objects from any origin.
-      mediaSrc: ["'self'", "https:", "*"],  // Allow media from any origin or HTTPS.
-      workerSrc: ["'self'", "blob:", "*"],  // Allow workers from any origin and blobs.
-      formAction: ["'self'", "https:", "*"],  // Allow form submissions to any HTTPS or origin.
-      frameAncestors: ["'self'", "*"],  // Allow embedding the page in frames from any origin.
-      upgradeInsecureRequests: [],  // Keep automatic upgrade to HTTPS where applicable.
-    }
-  }));
-
   app.use(helmet.frameguard())
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    res.setHeader('Content-Security-Policy', 'unsafe-inline')
+    next()
+  })
   // app.use(helmet.xssFilter()); // = no protection from persisted XSS via RESTful API
   app.disable('x-powered-by')
   app.use(featurePolicy({
