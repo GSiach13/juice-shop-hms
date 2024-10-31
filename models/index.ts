@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 import 'dotenv/config'
+=======
+/*
+ * Copyright (c) 2014-2024 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * SPDX-License-Identifier: MIT
+ */
+>>>>>>> ed4aa7cf05ff722551bf39862732cdba3269d7a2
 
 import { AddressModelInit } from './address'
 import { BasketModelInit } from './basket'
@@ -20,7 +27,9 @@ import { SecurityAnswerModelInit } from './securityAnswer'
 import { SecurityQuestionModelInit } from './securityQuestion'
 import { UserModelInit } from './user'
 import { WalletModelInit } from './wallet'
+import { Sequelize, Transaction } from 'sequelize'
 
+<<<<<<< HEAD
 const Sequelize = require('sequelize')
 
 const database = process.env.DATABASE_NAME
@@ -29,14 +38,23 @@ const password = process.env.DATABASE_PASSWORD
 const storage = process.env.DATABASE_STORAGE
 
 const sequelize = new Sequelize(database, username, password, {
+=======
+/* jslint node: true */
+const sequelize = new Sequelize('database', 'username', 'password', {
+>>>>>>> ed4aa7cf05ff722551bf39862732cdba3269d7a2
   dialect: 'sqlite',
   retry: {
     match: [/SQLITE_BUSY/],
     name: 'query',
     max: 5
   },
+<<<<<<< HEAD
   transactionType: 'IMMEDIATE',
   storage,
+=======
+  transactionType: Transaction.TYPES.IMMEDIATE,
+  storage: 'data/juiceshop.sqlite',
+>>>>>>> ed4aa7cf05ff722551bf39862732cdba3269d7a2
   logging: false
 })
 

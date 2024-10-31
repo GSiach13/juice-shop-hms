@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 import models = require('../models/index')
+=======
+/*
+ * Copyright (c) 2014-2024 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * SPDX-License-Identifier: MIT
+ */
+
+import * as models from '../models/index'
+>>>>>>> ed4aa7cf05ff722551bf39862732cdba3269d7a2
 import { type Request, type Response, type NextFunction } from 'express'
 import { UserModel } from '../models/user'
+import { challenges } from '../data/datacache'
 
 import * as utils from '../lib/utils'
 const challengeUtils = require('../lib/challengeUtils')
-const challenges = require('../data/datacache').challenges
 
 class ErrorWithParent extends Error {
   parent: Error | undefined
@@ -44,9 +53,13 @@ module.exports = function searchProducts () {
         }
         if (challengeUtils.notSolved(challenges.dbSchemaChallenge)) {
           let solved = true
+<<<<<<< HEAD
           models.sequelize.query('SELECT sql FROM sqlite_master', {
             type: models.sequelize.QueryTypes.SELECT
           }).then((data: any) => {
+=======
+          void models.sequelize.query('SELECT sql FROM sqlite_master').then(([data]: any) => {
+>>>>>>> ed4aa7cf05ff722551bf39862732cdba3269d7a2
             const tableDefinitions = utils.queryResultToJson(data)
             if (tableDefinitions.data?.length) {
               for (let i = 0; i < tableDefinitions.data.length; i++) {

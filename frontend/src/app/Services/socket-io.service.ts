@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+/*
+ * Copyright (c) 2014-2024 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * SPDX-License-Identifier: MIT
+ */
+
+>>>>>>> ed4aa7cf05ff722551bf39862732cdba3269d7a2
 import { environment } from 'src/environments/environment'
 import { Injectable, NgZone } from '@angular/core'
 import { io, type Socket } from 'socket.io-client'
