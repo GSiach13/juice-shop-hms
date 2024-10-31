@@ -1,0 +1,47 @@
+name: "My CI/CD Pipeline"
+on:
+  push:
+    branches-ignore:
+      - l10n_develop
+      - gh-pages
+    paths-ignore:
+      - "*.md"
+      - "LICENSE"
+      - "monitoring/grafana-dashboard.json"
+      - "screenshots/**"
+    tags-ignore:
+      - "*"
+env:
+  ANGULAR_CLI_VERSION: 15
+  CYCLONEDX_NPM_VERSION: "^1.12.0"
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      #   - name: ⎔ Setup node
+      #     uses: actions/setup-node@v2
+      #     with:
+      #       node-version: 18
+
+      - name: Install CLI tools
+        run: npm install -g @angular/cli@$ANGULAR_CLI_VERSION
+
+      - name: 📥 Download deps
+        run: npm install
+
+      - name: 🧪 Run unit test script
+        uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: npm test
+#   deploy:
+#     needs: ci
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name:
+#         uses:
+#         with:
