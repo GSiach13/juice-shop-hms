@@ -14,6 +14,7 @@ on:
 env:
   ANGULAR_CLI_VERSION: 15
   CYCLONEDX_NPM_VERSION: "^1.12.0"
+  PORT: 3001
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -59,10 +60,26 @@ jobs:
           timeout_minutes: 15
           max_attempts: 3
           command: npm run test:chromium
-#   deploy:
-#     needs: ci
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name:
-#         uses:
-#         with:
+
+  # deploy-cicdrevamp:
+  #   if: github.ref == 'refs/heads/cicdrevamp'
+  #   needs: ci
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: ssh and deploy to machine
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
+  #         username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
+  #         key: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
+  #         port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
+  #         script: |
+  #           cd ~/juice-shop-hms
+  #           git reset --hard origin/cicdrevamp
+  #           git pull https://${{ secrets.CLONE_TOKEN }}@github.com/GSiach13/juice-shop-hms
+  #           npm install && npm start
+  #     # bash -ci 'pm2 restart server-staging'
+  #     - name: ZAP Full Scan
+  #       uses: zaproxy/action-full-scan@v0.11.0
+  #       with:
+  #         target: http://83.212.109.249:${{PORT}}/
