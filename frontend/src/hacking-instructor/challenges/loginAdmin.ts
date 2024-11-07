@@ -71,7 +71,7 @@ export const LoginAdminInstruction: ChallengeInstruction = {
     {
       text: 'Did you spot the error message with the `SQLITE_ERROR` and the entire SQL query in the 500 response to `/login`? If not, keep the network tab open and click _Log in_ again. Then inspect the occuring response closely.',
       fixture: '#rememberMe',
-      resolved: waitInMs(30000)
+      resolved: waitInMs(30010)
     },
     {
       text: "Let's try to manipulate the query a bit to make it useful. Try out typing `' OR true` into the **email field**.",

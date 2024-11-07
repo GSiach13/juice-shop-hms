@@ -25,7 +25,7 @@ describe('CodeSnippetService', () => {
       let res: any
       service.get('testChallenge').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/snippets/testChallenge')
+      const req = httpMock.expectOne('http://localhost:3001/snippets/testChallenge')
       req.flush({ snippet: 'apiResponse' })
       tick()
 
@@ -40,7 +40,7 @@ describe('CodeSnippetService', () => {
       let res: any
       service.challenges().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/snippets')
+      const req = httpMock.expectOne('http://localhost:3001/snippets')
       req.flush({ challenges: ['directoryListingChallenge', 'accessLogDisclosureChallenge', '...', 'xssBonusChallenge'] })
       tick()
 

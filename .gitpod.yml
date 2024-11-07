@@ -5,5 +5,5 @@ tasks:
 ports:
   - name: OWASP Juice Shop
     description: The Juice Shop web server
-    port: 3000
+    port: 3001
     onOpen: open-preview

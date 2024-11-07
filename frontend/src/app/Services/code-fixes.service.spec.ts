@@ -22,7 +22,7 @@ describe('CodeFixesService', () => {
       let res: any
       service.get('testChallenge').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/snippets/fixes/testChallenge')
+      const req = httpMock.expectOne('http://localhost:3001/snippets/fixes/testChallenge')
       req.flush({ snippet: 'apiResponse' })
       tick()
 
@@ -36,7 +36,7 @@ describe('CodeFixesService', () => {
     fakeAsync((service: CodeFixesService, httpMock: HttpTestingController) => {
       let res: any
       service.check('testChallenge', 1).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/snippets/fixes')
+      const req = httpMock.expectOne('http://localhost:3001/snippets/fixes')
       req.flush('apiResponse')
 
       tick()

@@ -12,8 +12,8 @@ const security = require('../../lib/insecurity')
 const christmasProduct = config.get<ProductConfig[]>('products').filter(({ useForChristmasSpecialChallenge }) => useForChristmasSpecialChallenge)[0]
 const pastebinLeakProduct = config.get<ProductConfig[]>('products').filter(({ keywordsForPastebinDataLeakChallenge }) => keywordsForPastebinDataLeakChallenge)[0]
 
-const API_URL = 'http://localhost:3000/api'
-const REST_URL = 'http://localhost:3000/rest'
+const API_URL = 'http://localhost:3001/api'
+const REST_URL = 'http://localhost:3001/rest'
 
 describe('/rest/products/search', () => {
   it('GET product search with no matches returns no products', () => {

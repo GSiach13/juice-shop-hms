@@ -24,7 +24,7 @@ describe('TwoFactorAuthServiceService', () => {
       let res: any
       service.verify('123456').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/2fa/verify')
+      const req = httpMock.expectOne('http://localhost:3001/rest/2fa/verify')
       req.flush({ authentication: 'apiResponse' })
       tick()
 
@@ -40,7 +40,7 @@ describe('TwoFactorAuthServiceService', () => {
       let res: any
       service.status().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/2fa/status')
+      const req = httpMock.expectOne('http://localhost:3001/rest/2fa/status')
       req.flush({ setup: false })
       tick()
 
@@ -56,7 +56,7 @@ describe('TwoFactorAuthServiceService', () => {
       let res: any
       service.setup('s3cr3t!', 'initialToken', 'setupToken').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/2fa/setup')
+      const req = httpMock.expectOne('http://localhost:3001/rest/2fa/setup')
       req.flush({})
       tick()
 
@@ -72,7 +72,7 @@ describe('TwoFactorAuthServiceService', () => {
       let res: any
       service.disable('s3cr3t!').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/2fa/disable')
+      const req = httpMock.expectOne('http://localhost:3001/rest/2fa/disable')
       req.flush({})
       tick()
 

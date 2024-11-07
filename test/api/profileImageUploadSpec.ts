@@ -9,8 +9,8 @@ import path from 'path'
 const fs = require('fs')
 
 const jsonHeader = { 'content-type': 'application/json' }
-const REST_URL = 'http://localhost:3000/rest'
-const URL = 'http://localhost:3000'
+const REST_URL = 'http://localhost:3001/rest'
+const URL = 'http://localhost:3001'
 
 describe('/profile/image/file', () => {
   it('POST profile image file valid for JPG format', () => {

@@ -25,7 +25,7 @@ describe('UserService', () => {
       let res: any
       service.find().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/user/authentication-details/')
+      const req = httpMock.expectOne('http://localhost:3001/rest/user/authentication-details/')
       req.flush({ data: 'apiResponse' })
       tick()
 
@@ -41,7 +41,7 @@ describe('UserService', () => {
       let res: any
       service.get(1).subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/api/Users/1')
+      const req = httpMock.expectOne('http://localhost:3001/api/Users/1')
       req.flush({ data: 'apiResponse' })
       tick()
 
@@ -56,7 +56,7 @@ describe('UserService', () => {
       let res: any
       service.save(null).subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/api/Users/')
+      const req = httpMock.expectOne('http://localhost:3001/api/Users/')
       req.flush({ data: 'apiResponse' })
       tick()
 
@@ -72,7 +72,7 @@ describe('UserService', () => {
       let res: any
       service.login(null).subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/user/login')
+      const req = httpMock.expectOne('http://localhost:3001/rest/user/login')
       req.flush({ authentication: 'apiResponse' })
       tick()
 
@@ -88,7 +88,7 @@ describe('UserService', () => {
       let res: any
       service.changePassword({ current: 'foo', new: 'bar', repeat: 'bar' }).subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/user/change-password?current=foo&new=bar&repeat=bar')
+      const req = httpMock.expectOne('http://localhost:3001/rest/user/change-password?current=foo&new=bar&repeat=bar')
       req.flush({ user: 'apiResponse' })
       tick()
 
@@ -103,7 +103,7 @@ describe('UserService', () => {
       let res: any
       service.whoAmI().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/user/whoami')
+      const req = httpMock.expectOne('http://localhost:3001/rest/user/whoami')
       req.flush({ user: 'apiResponse' })
       tick()
 
@@ -119,7 +119,7 @@ describe('UserService', () => {
       const mockObject = { req: 'apiRequest' }
       service.resetPassword(mockObject).subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/user/reset-password')
+      const req = httpMock.expectOne('http://localhost:3001/rest/user/reset-password')
       req.flush({ user: 'apiResponse' })
       tick()
 
@@ -134,7 +134,7 @@ describe('UserService', () => {
     fakeAsync((service: UserService, httpMock: HttpTestingController) => {
       let res
       service.deluxeStatus().subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/deluxe-membership')
+      const req = httpMock.expectOne('http://localhost:3001/rest/deluxe-membership')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('GET')
@@ -147,7 +147,7 @@ describe('UserService', () => {
     fakeAsync((service: UserService, httpMock: HttpTestingController) => {
       let res
       service.upgradeToDeluxe('wallet', null).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/deluxe-membership')
+      const req = httpMock.expectOne('http://localhost:3001/rest/deluxe-membership')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('POST')

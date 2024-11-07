@@ -23,7 +23,7 @@ describe('PaymentService', () => {
     fakeAsync((service: PaymentService, httpMock: HttpTestingController) => {
       let res
       service.get().subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Cards')
+      const req = httpMock.expectOne('http://localhost:3001/api/Cards')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('GET')
@@ -36,7 +36,7 @@ describe('PaymentService', () => {
     fakeAsync((service: PaymentService, httpMock: HttpTestingController) => {
       let res
       service.getById(1).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Cards/1')
+      const req = httpMock.expectOne('http://localhost:3001/api/Cards/1')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('GET')
@@ -49,7 +49,7 @@ describe('PaymentService', () => {
     fakeAsync((service: PaymentService, httpMock: HttpTestingController) => {
       let res
       service.save({}).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Cards/')
+      const req = httpMock.expectOne('http://localhost:3001/api/Cards/')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('POST')
@@ -62,7 +62,7 @@ describe('PaymentService', () => {
     fakeAsync((service: PaymentService, httpMock: HttpTestingController) => {
       let res
       service.del(1).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Cards/1')
+      const req = httpMock.expectOne('http://localhost:3001/api/Cards/1')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('DELETE')

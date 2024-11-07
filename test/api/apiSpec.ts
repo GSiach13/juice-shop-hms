@@ -6,8 +6,8 @@
 import frisby = require('frisby')
 import config from 'config'
 
-const API_URL = 'http://localhost:3000/api'
-const REST_URL = 'http://localhost:3000/rest'
+const API_URL = 'http://localhost:3001/api'
+const REST_URL = 'http://localhost:3001/rest'
 
 describe('/api', () => {
   it('GET error when query /api without actual resource', () => {

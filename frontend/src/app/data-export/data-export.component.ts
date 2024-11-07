@@ -34,7 +34,7 @@ export class DataExportComponent implements OnInit {
   needCaptcha () {
     const nowTime = new Date()
     const timeOfCaptcha = localStorage.getItem('lstdtxprt') ? new Date(JSON.parse(String(localStorage.getItem('lstdtxprt')))) : new Date(0)
-    if (nowTime.getTime() - timeOfCaptcha.getTime() < 300000) {
+    if (nowTime.getTime() - timeOfCaptcha.getTime() < 300100) {
       this.getNewCaptcha()
       this.presenceOfCaptcha = true
     }

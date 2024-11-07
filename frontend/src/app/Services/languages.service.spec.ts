@@ -24,7 +24,7 @@ describe('LanguagesService', () => {
       let res: any
       service.getLanguages().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/languages')
+      const req = httpMock.expectOne('http://localhost:3001/rest/languages')
       req.flush('apiResponse')
 
       tick()

@@ -24,7 +24,7 @@ describe('QuantityService', () => {
     fakeAsync((service: QuantityService, httpMock: HttpTestingController) => {
       let res
       service.getAll().subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Quantitys/')
+      const req = httpMock.expectOne('http://localhost:3001/api/Quantitys/')
       req.flush({ data: 'apiResponse' })
 
       tick()
@@ -39,7 +39,7 @@ describe('QuantityService', () => {
     fakeAsync((service: QuantityService, httpMock: HttpTestingController) => {
       let res
       service.put(42, {}).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Quantitys/42')
+      const req = httpMock.expectOne('http://localhost:3001/api/Quantitys/42')
       req.flush({ data: 'apiResponse' })
 
       tick()

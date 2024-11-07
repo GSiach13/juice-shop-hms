@@ -10,7 +10,7 @@ import { initialize, bot } from '../../routes/chatbot'
 import fs from 'fs/promises'
 import * as utils from '../../lib/utils'
 
-const URL = 'http://localhost:3000'
+const URL = 'http://localhost:3001'
 const REST_URL = `${URL}/rest/`
 const API_URL = `${URL}/api/`
 let trainingData: { data: any[] }

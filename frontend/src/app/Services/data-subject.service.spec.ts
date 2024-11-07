@@ -23,7 +23,7 @@ describe('DataSubjectService', () => {
     fakeAsync((service: DataSubjectService, httpMock: HttpTestingController) => {
       let res: any
       service.erase({}).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/user/erasure-request')
+      const req = httpMock.expectOne('http://localhost:3001/rest/user/erasure-request')
       req.flush('apiResponse')
 
       tick()
@@ -38,7 +38,7 @@ describe('DataSubjectService', () => {
     fakeAsync((service: DataSubjectService, httpMock: HttpTestingController) => {
       let res: any
       service.dataExport(1).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/user/data-export')
+      const req = httpMock.expectOne('http://localhost:3001/rest/user/data-export')
       req.flush('apiResponse')
 
       tick()

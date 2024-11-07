@@ -7,8 +7,8 @@ import frisby = require('frisby')
 import config from 'config'
 
 const jsonHeader = { 'content-type': 'application/json' }
-const REST_URL = 'http://localhost:3000/rest'
-const API_URL = 'http://localhost:3000/api'
+const REST_URL = 'http://localhost:3001/rest'
+const API_URL = 'http://localhost:3001/api'
 
 async function login ({ email, password }: { email: string, password: string }) {
   // @ts-expect-error FIXME promise return handling broken

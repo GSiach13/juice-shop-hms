@@ -23,7 +23,7 @@ describe('ImageCaptchaService', () => {
     fakeAsync((service: ImageCaptchaService, httpMock: HttpTestingController) => {
       let res: any
       service.getCaptcha().subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/image-captcha/')
+      const req = httpMock.expectOne('http://localhost:3001/rest/image-captcha/')
       req.flush('apiResponse')
 
       tick()

@@ -73,7 +73,7 @@ describe('/profile', () => {
     xit('should be possible to perform a CSRF attack against the user profile page', () => {
       cy.visit('http://htmledit.squarefree.com')
       /* The script executed below is equivalent to pasting this string into http://htmledit.squarefree.com: */
-      /* <form action="http://localhost:3000/profile" method="POST"><input type="hidden" name="username" value="CSRF"/><input type="submit"/></form><script>document.forms[0].submit();</script> */
+      /* <form action="http://localhost:3001/profile" method="POST"><input type="hidden" name="username" value="CSRF"/><input type="submit"/></form><script>document.forms[0].submit();</script> */
       let document: any
       cy.window().then(() => {
         document

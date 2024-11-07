@@ -50,19 +50,19 @@ describe('preconditionValidation', () => {
   })
 
   describe('checkIfPortIsAvailable', () => {
-    it('should resolve when port 3000 is closed', async () => {
-      const success = await checkIfPortIsAvailable(3000)
+    it('should resolve when port 3001 is closed', async () => {
+      const success = await checkIfPortIsAvailable(3001)
       expect(success).to.equal(true)
     })
 
     describe('open a server before running the test', () => {
       const testServer = net.createServer()
       before((done) => {
-        testServer.listen(3000, done)
+        testServer.listen(3001, done)
       })
 
-      it('should reject when port 3000 is open', async () => {
-        const success = await checkIfPortIsAvailable(3000)
+      it('should reject when port 3001 is open', async () => {
+        const success = await checkIfPortIsAvailable(3001)
         expect(success).to.equal(false)
       })
 

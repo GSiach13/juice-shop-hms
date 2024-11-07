@@ -6,7 +6,7 @@
 import frisby = require('frisby')
 const Joi = frisby.Joi
 
-const REST_URL = 'http://localhost:3000/rest'
+const REST_URL = 'http://localhost:3001/rest'
 
 describe('/rest/track-order/:id', () => {
   it('GET tracking results for the order id', () => {

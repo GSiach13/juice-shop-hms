@@ -24,7 +24,7 @@ describe('ProductReviewService', () => {
     fakeAsync((service: ProductReviewService, httpMock: HttpTestingController) => {
       let res: any
       service.get(42).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/products/42/reviews')
+      const req = httpMock.expectOne('http://localhost:3001/rest/products/42/reviews')
       req.flush({ data: 'apiResponse' })
 
       tick()
@@ -38,7 +38,7 @@ describe('ProductReviewService', () => {
     fakeAsync((service: ProductReviewService, httpMock: HttpTestingController) => {
       let res: any
       service.create(42, { message: 'A', author: 'B' }).subscribe((data: any) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/products/42/reviews')
+      const req = httpMock.expectOne('http://localhost:3001/rest/products/42/reviews')
       req.flush({ data: 'apiResponse' })
 
       tick()
@@ -53,7 +53,7 @@ describe('ProductReviewService', () => {
     fakeAsync((service: ProductReviewService, httpMock: HttpTestingController) => {
       let res: any
       service.patch(null as unknown as { id: string, message: string }).subscribe((data: any) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/products/reviews')
+      const req = httpMock.expectOne('http://localhost:3001/rest/products/reviews')
       req.flush({ data: 'apiResponse' })
 
       tick()

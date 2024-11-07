@@ -24,7 +24,7 @@ describe('FeedbackService', () => {
     fakeAsync((service: FeedbackService, httpMock: HttpTestingController) => {
       let res: any
       service.find(null).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/')
+      const req = httpMock.expectOne('http://localhost:3001/api/Feedbacks/')
       req.flush({ data: 'apiResponse' })
 
       tick()
@@ -39,7 +39,7 @@ describe('FeedbackService', () => {
     fakeAsync((service: FeedbackService, httpMock: HttpTestingController) => {
       let res: any
       service.del(1).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/1')
+      const req = httpMock.expectOne('http://localhost:3001/api/Feedbacks/1')
       req.flush({ data: 'apiResponse' })
 
       tick()
@@ -53,7 +53,7 @@ describe('FeedbackService', () => {
     fakeAsync((service: FeedbackService, httpMock: HttpTestingController) => {
       let res: any
       service.save(null).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/')
+      const req = httpMock.expectOne('http://localhost:3001/api/Feedbacks/')
       req.flush({ data: 'apiResponse' })
 
       tick()

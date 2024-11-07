@@ -9,7 +9,7 @@ export default defineConfig({
   projectId: '3hrkhu',
   defaultCommandTimeout: 10000,
   e2e: {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3001',
     specPattern: 'test/cypress/e2e/**.spec.ts',
     downloadsFolder: 'test/cypress/downloads',
     fixturesFolder: false,

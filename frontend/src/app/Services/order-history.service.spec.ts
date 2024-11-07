@@ -23,7 +23,7 @@ describe('OrderHistoryService', () => {
     fakeAsync((service: OrderHistoryService, httpMock: HttpTestingController) => {
       let res
       service.get().subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/order-history')
+      const req = httpMock.expectOne('http://localhost:3001/rest/order-history')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('GET')
@@ -36,7 +36,7 @@ describe('OrderHistoryService', () => {
     fakeAsync((service: OrderHistoryService, httpMock: HttpTestingController) => {
       let res
       service.getAll().subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/order-history/orders')
+      const req = httpMock.expectOne('http://localhost:3001/rest/order-history/orders')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('GET')
@@ -49,7 +49,7 @@ describe('OrderHistoryService', () => {
     fakeAsync((service: OrderHistoryService, httpMock: HttpTestingController) => {
       let res
       service.toggleDeliveryStatus(1, {}).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/rest/order-history/1/delivery-status')
+      const req = httpMock.expectOne('http://localhost:3001/rest/order-history/1/delivery-status')
       req.flush({ data: 'apiResponse' })
       tick()
       expect(req.request.method).toBe('PUT')

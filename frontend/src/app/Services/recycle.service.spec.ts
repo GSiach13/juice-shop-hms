@@ -24,7 +24,7 @@ describe('RecycleService', () => {
     fakeAsync((service: RecycleService, httpMock: HttpTestingController) => {
       let res: any
       service.find().subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Recycles/')
+      const req = httpMock.expectOne('http://localhost:3001/api/Recycles/')
       req.flush({ data: 'apiResponse' })
 
       tick()
@@ -39,7 +39,7 @@ describe('RecycleService', () => {
     fakeAsync((service: RecycleService, httpMock: HttpTestingController) => {
       let res: any
       service.save(1).subscribe((data) => (res = data))
-      const req = httpMock.expectOne('http://localhost:3000/api/Recycles/')
+      const req = httpMock.expectOne('http://localhost:3001/api/Recycles/')
       req.flush({ data: 'apiResponse' })
 
       tick()

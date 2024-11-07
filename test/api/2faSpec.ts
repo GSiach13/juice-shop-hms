@@ -11,8 +11,8 @@ const security = require('../../lib/insecurity')
 
 const otplib = require('otplib')
 
-const REST_URL = 'http://localhost:3000/rest'
-const API_URL = 'http://localhost:3000/api'
+const REST_URL = 'http://localhost:3001/rest'
+const API_URL = 'http://localhost:3001/api'
 
 const jsonHeader = { 'content-type': 'application/json' }
 

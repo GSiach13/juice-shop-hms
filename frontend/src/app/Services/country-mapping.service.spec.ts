@@ -25,7 +25,7 @@ describe('CountryMappingService', () => {
       let res: any
       service.getCountryMapping().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/country-mapping')
+      const req = httpMock.expectOne('http://localhost:3001/rest/country-mapping')
       req.flush('apiResponse')
 
       tick()

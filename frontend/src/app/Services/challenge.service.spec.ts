@@ -27,7 +27,7 @@ describe('ChallengeService', () => {
       let res: any
       service.find().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/api/Challenges/')
+      const req = httpMock.expectOne('http://localhost:3001/api/Challenges/')
       req.flush({ data: 'apiResponse' })
       tick()
 
@@ -42,7 +42,7 @@ describe('ChallengeService', () => {
       let res: any
       service.continueCode().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/continue-code')
+      const req = httpMock.expectOne('http://localhost:3001/rest/continue-code')
       req.flush({ continueCode: 'apiResponse' })
       tick()
 
@@ -57,7 +57,7 @@ describe('ChallengeService', () => {
       let res: any
       service.restoreProgress('CODE').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/continue-code/apply/CODE')
+      const req = httpMock.expectOne('http://localhost:3001/rest/continue-code/apply/CODE')
       req.flush({ data: 'apiResponse' })
       tick()
 
@@ -72,7 +72,7 @@ describe('ChallengeService', () => {
       let res: any
       service.continueCodeFindIt().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/continue-code-findIt')
+      const req = httpMock.expectOne('http://localhost:3001/rest/continue-code-findIt')
       req.flush({ continueCode: 'apiResponse' })
       tick()
 
@@ -87,7 +87,7 @@ describe('ChallengeService', () => {
       let res: any
       service.restoreProgressFindIt('CODE').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/continue-code-findIt/apply/CODE')
+      const req = httpMock.expectOne('http://localhost:3001/rest/continue-code-findIt/apply/CODE')
       req.flush({ data: 'apiResponse' })
       tick()
 
@@ -102,7 +102,7 @@ describe('ChallengeService', () => {
       let res: any
       service.continueCodeFixIt().subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/continue-code-fixIt')
+      const req = httpMock.expectOne('http://localhost:3001/rest/continue-code-fixIt')
       req.flush({ continueCode: 'apiResponse' })
       tick()
 
@@ -117,7 +117,7 @@ describe('ChallengeService', () => {
       let res: any
       service.restoreProgressFixIt('CODE').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne('http://localhost:3000/rest/continue-code-fixIt/apply/CODE')
+      const req = httpMock.expectOne('http://localhost:3001/rest/continue-code-fixIt/apply/CODE')
       req.flush({ data: 'apiResponse' })
       tick()
 
@@ -132,7 +132,7 @@ describe('ChallengeService', () => {
       let res: any
       service.repeatNotification('CHALLENGE').subscribe((data) => (res = data))
 
-      const req = httpMock.expectOne(req => req.url === 'http://localhost:3000/rest/repeat-notification')
+      const req = httpMock.expectOne(req => req.url === 'http://localhost:3001/rest/repeat-notification')
       req.flush('apiResponse')
       tick()
 

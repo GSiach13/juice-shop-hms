@@ -14,7 +14,7 @@ const security = require('../../lib/insecurity')
 // array index of the items is incremented by one because the db id starts with 1
 const tamperingProductId = config.get<ProductConfig[]>('products').findIndex((product) => !!product.urlForProductTamperingChallenge) + 1
 
-const API_URL = 'http://localhost:3000/api'
+const API_URL = 'http://localhost:3001/api'
 
 const authHeader = { Authorization: 'Bearer ' + security.authorize(), 'content-type': 'application/json' }
 const jsonHeader = { 'content-type': 'application/json' }
