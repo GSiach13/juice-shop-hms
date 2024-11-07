@@ -70,7 +70,7 @@ jobs:
         with:
           host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
           username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
-          key: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
+          password: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
           port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
           script: |
             cd ~/juice-shop-hms
