@@ -74,8 +74,7 @@ jobs:
           port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
           script: |
             cd ~/juice-shop-hms
-            echo "successfully entered dir"
-            git pull https://${{ secrets.CLONE_TOKEN }}@github.com/GSiach13/juice-shop-hms
+            git pull
             npm install && npm start
             echo "Successfully deployed!"
       # bash -ci 'pm2 restart server-staging'
