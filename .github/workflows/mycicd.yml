@@ -74,6 +74,7 @@ jobs:
           port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
           script: |
             cd ~/juice-shop-hms
+            nvm use 16
             git pull
             npm install && npm start
             echo "Successfully deployed!"
