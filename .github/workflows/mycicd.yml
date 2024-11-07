@@ -70,6 +70,7 @@ jobs:
           host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
           username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
           password: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
+          command_timeout: 20m
           port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
           script: |
             cd ~/juice-shop-hms
