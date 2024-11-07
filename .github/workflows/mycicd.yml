@@ -77,8 +77,9 @@ jobs:
             git reset --hard origin/cicdrevamp
             git pull https://${{ secrets.CLONE_TOKEN }}@github.com/GSiach13/juice-shop-hms
             npm install && npm start
+            echo "Successfully deployed!"
       # bash -ci 'pm2 restart server-staging'
       - name: ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.11.0
         with:
-          target: http://83.212.109.249:3001/
+          target: ${{ secrets.REVAMP_SERVER_APP_IP }}
