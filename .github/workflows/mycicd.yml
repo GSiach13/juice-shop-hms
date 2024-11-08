@@ -75,8 +75,14 @@ jobs:
           script: |
             cd ~/juice-shop-hms
             git pull
+            docker stop $(docker ps -a -q)
+            echo "Stopped all running containers"
+            docker container prune
+            echo "Removed all containers"
+            docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+            echo "Removed all dangling images"
             docker build -t foo . 
-            echo "Successfully built!"
+            echo "Successfully built docker image!"
             docker run -d -p 83.212.109.249:3000:3001 foo:latest            
             echo "Successfully deployed!"
       # bash -ci 'pm2 restart server-staging'
