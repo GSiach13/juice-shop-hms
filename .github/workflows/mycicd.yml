@@ -77,7 +77,7 @@ jobs:
             git pull
             docker build -t foo . 
             echo "Successfully built!"
-            docker run -d foo:latest            
+            docker run -d -p 3001:3001 foo:latest            
             echo "Successfully deployed!"
       # bash -ci 'pm2 restart server-staging'
       - name: ZAP Full Scan
