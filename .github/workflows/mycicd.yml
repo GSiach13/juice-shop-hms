@@ -16,69 +16,69 @@ env:
   CYCLONEDX_NPM_VERSION: "^1.12.0"
   # PORT: 3001
 jobs:
-  # ci:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: ⬇️ Checkout repo
-  #       uses: actions/checkout@v2
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
 
   #     #   - name: ⎔ Setup node
   #     #     uses: actions/setup-node@v2
   #     #     with:
   #     #       node-version: 18
 
-  #     - name: Install CLI tools
-  #       run: npm install -g @angular/cli@$ANGULAR_CLI_VERSION
+      - name: Install CLI tools
+        run: npm install -g @angular/cli@$ANGULAR_CLI_VERSION
 
-  #     - name: 📥 Download deps
-  #       run: npm install && echo "npm install finished successfully"
+      - name: 📥 Download deps
+        run: npm install && echo "npm install finished successfully"
 
-  #     - name: 🧪 Run unit test script
-  #       uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
-  #       with:
-  #         timeout_minutes: 15
-  #         max_attempts: 3
-  #         command: npm test
+      - name: 🧪 Run unit test script
+        uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: npm test
 
-  #     - name: 🧪 Run server test script
-  #       uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
-  #       with:
-  #         timeout_minutes: 15
-  #         max_attempts: 3
-  #         command: npm run test:server
+      - name: 🧪 Run server test script
+        uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: npm run test:server
 
-  #     - name: 🧪 Run api test script
-  #       uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
-  #       with:
-  #         timeout_minutes: 15
-  #         max_attempts: 3
-  #         command: npm run test:api
+      - name: 🧪 Run api test script
+        uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: npm run test:api
 
-  #     - name: 🧪 Run chromiium test script
-  #       uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
-  #       with:
-  #         timeout_minutes: 15
-  #         max_attempts: 3
-  #         command: npm run test:chromium
+      - name: 🧪 Run chromiium test script
+        uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: npm run test:chromium
   deploy-cicdrevamp:
-    # needs: ci
+    needs: ci
     runs-on: ubuntu-latest
     steps:
-      # - name: ssh and deploy to machine
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
-      #     username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
-      #     password: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
-      #     command_timeout: 40m
-      #     port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
-      #     script: |
-      #       cd ~/juice-shop-hms
-      #       git pull
-      #       docker build -t foo . 
-      #       echo "Successfully built!"
-      #       docker run -d -p 83.212.109.249:3000:3001 foo:latest            
-      #       echo "Successfully deployed!"
+      - name: ssh and deploy to machine
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
+          username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
+          password: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
+          command_timeout: 30m
+          port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
+          script: |
+            cd ~/juice-shop-hms
+            git pull
+            docker build -t foo . 
+            echo "Successfully built!"
+            docker run -d -p 83.212.109.249:3000:3001 foo:latest            
+            echo "Successfully deployed!"
       # bash -ci 'pm2 restart server-staging'
       - name: ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.11.0
