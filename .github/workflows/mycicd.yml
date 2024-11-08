@@ -64,21 +64,21 @@ jobs:
     # needs: ci
     runs-on: ubuntu-latest
     steps:
-      - name: ssh and deploy to machine
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
-          username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
-          password: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
-          command_timeout: 40m
-          port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
-          script: |
-            cd ~/juice-shop-hms
-            git pull
-            docker build -t foo . 
-            echo "Successfully built!"
-            docker run -d -p 3001:3001 foo:latest            
-            echo "Successfully deployed!"
+      # - name: ssh and deploy to machine
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
+      #     username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
+      #     password: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
+      #     command_timeout: 40m
+      #     port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
+      #     script: |
+      #       cd ~/juice-shop-hms
+      #       git pull
+      #       docker build -t foo . 
+      #       echo "Successfully built!"
+      #       docker run -d -p 83.212.109.249:3000:3001 foo:latest            
+      #       echo "Successfully deployed!"
       # bash -ci 'pm2 restart server-staging'
       - name: ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.11.0
