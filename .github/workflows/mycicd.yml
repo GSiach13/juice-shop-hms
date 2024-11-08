@@ -83,7 +83,7 @@ jobs:
             echo "Removed all dangling images"
             docker build -t foo . 
             echo "Successfully built docker image!"
-            docker run -d -p 83.212.109.249:3000:3001 foo:latest            
+            docker run -d -p 83.212.109.249:3001:3000 foo:latest            
             echo "Successfully deployed!"
       # bash -ci 'pm2 restart server-staging'
       - name: ZAP Full Scan
