@@ -60,7 +60,7 @@ jobs:
           timeout_minutes: 15
           max_attempts: 3
           command: npm run test:chromium
-  deploy-cicdrevamp:
+  deploy:
     needs: ci
     runs-on: ubuntu-latest
     steps:
@@ -86,8 +86,12 @@ jobs:
             docker run -d -p 83.212.109.249:3001:3000 foo:latest            
             echo "Successfully deployed!"
       # bash -ci 'pm2 restart server-staging'
+  zap:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
       - name: ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.11.0
         with:
           target: ${{ secrets.REVAMP_SERVER_APP_IP }}
-          cmd_options: '-j'
+          cmd_options: '-a -j'
