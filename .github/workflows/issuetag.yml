@@ -1,18 +1,28 @@
 name: Label issues
 on:
   issues:
-    types:
-      - reopened
-      - opened
+    types: [opened, reopened]
 jobs:
   label_issues:
     runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
-      - run: gh issue edit "$NUMBER" --add-label "$LABELS"
+      - run: echo gh version
+          echo ${{ github.repository }}
+          echo ${{ github.event.issue.number }}
+          gh issue edit "$NUMBER" --add-label "$LABELS"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
           LABELS: llm
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo Assigned issue $NUMBER to LLMs
+        env:
+          NUMBER: ${{ github.event.issue.number }}
