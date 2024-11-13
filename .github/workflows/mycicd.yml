@@ -95,3 +95,9 @@ jobs:
         with:
           target: ${{ secrets.REVAMP_SERVER_APP_IP }}
           cmd_options: '-a -j'
+      - name: Download Report Artifact
+        uses: actions/download-artifact@v4
+        with:
+          overwrite: true
+      - name: Display structure of downloaded files
+        run: ls -R
