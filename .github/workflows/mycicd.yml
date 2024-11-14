@@ -99,3 +99,26 @@ jobs:
         uses: actions/download-artifact@v4
       - name: Display structure of downloaded files
         run: ls -R
+  label_issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - run: echo gh version
+          echo ${{ github.repository }}
+          echo ${{ github.event.issue.number }}
+          gh issue edit "$NUMBER" --add-label "$LABELS"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          LABELS: llm
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo Assigned issue $NUMBER to LLMs
+        env:
+          NUMBER: ${{ github.event.issue.number }}
