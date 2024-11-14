@@ -94,7 +94,7 @@ jobs:
         uses: zaproxy/action-full-scan@v0.11.0
         with:
           target: ${{ secrets.REVAMP_SERVER_APP_IP }}
-          cmd_options: "-a -j -J our_report_json"
+          cmd_options: "-a -j"
       - name: Download Report Artifact
         uses: actions/download-artifact@v4
       - name: Display structure of downloaded files
