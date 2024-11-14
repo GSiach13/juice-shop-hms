@@ -104,9 +104,10 @@ jobs:
     permissions:
       issues: write
     steps:
-      - run: echo gh version
+      - run: 
+          echo gh version
           echo ${{ github.repository }}
-          echo ${{ github.event.issue.number }}
+          echo Issue number ${{ github.event.issue.number }}
           gh issue edit "$NUMBER" --add-label "$LABELS"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
