@@ -1,6 +1,7 @@
 import models = require('../models/index')
 import { type Request, type Response, type NextFunction } from 'express'
 import { UserModel } from '../models/user'
+import { QueryTypes } from 'sequelize'
 
 import * as utils from '../lib/utils'
 const challengeUtils = require('../lib/challengeUtils')
@@ -19,7 +20,7 @@ module.exports = function searchProducts () {
     const replacements = { criteria: `%${criteria}%` }
     models.sequelize.query(query, {
       replacements,
-      type: models.sequelize.QueryTypes.SELECT
+      type: QueryTypes.SELECT
     })
       .then((products: any) => {
         const dataString = JSON.stringify(products)
@@ -45,7 +46,7 @@ module.exports = function searchProducts () {
         if (challengeUtils.notSolved(challenges.dbSchemaChallenge)) {
           let solved = true
           models.sequelize.query('SELECT sql FROM sqlite_master', {
-            type: models.sequelize.QueryTypes.SELECT
+            type: QueryTypes.SELECT
           }).then((data: any) => {
             const tableDefinitions = utils.queryResultToJson(data)
             if (tableDefinitions.data?.length) {
@@ -61,6 +62,8 @@ module.exports = function searchProducts () {
                 challengeUtils.solve(challenges.dbSchemaChallenge)
               }
             }
+          }).catch((error) => {
+            console.error(error)
           })
         }
         for (let i = 0; i < products.length; i++) {
