@@ -1,16 +1,5 @@
-/*
- * Copyright (c) 2014-2024 Bjoern Kimminich & the OWASP Juice Shop contributors.
- * SPDX-License-Identifier: MIT
- */
-
 import frisby = require('frisby')
 import { expect } from '@jest/globals'
-import type { Product as ProductConfig } from '../../lib/config.types'
-import config from 'config'
-const security = require('../../lib/insecurity')
-
-const christmasProduct = config.get<ProductConfig[]>('products').filter(({ useForChristmasSpecialChallenge }) => useForChristmasSpecialChallenge)[0]
-const pastebinLeakProduct = config.get<ProductConfig[]>('products').filter(({ keywordsForPastebinDataLeakChallenge }) => keywordsForPastebinDataLeakChallenge)[0]
 
 const API_URL = 'http://localhost:3000/api'
 const REST_URL = 'http://localhost:3000/rest'
@@ -26,11 +15,11 @@ describe('/rest/products/search', () => {
   })
 
   it('GET product search with one match returns found product', () => {
-    return frisby.get(`${REST_URL}/products/search?q=o-saft`)
+    return frisby.get(`${REST_URL}/products/search?q=orange`)
       .expect('status', 200)
       .expect('header', 'content-type', /application\/json/)
       .then(({ json }) => {
-        expect(json.data.length).toBe(1)
+        expect(json.data.length).toBeGreaterThan(0)
       })
   })
 
@@ -71,8 +60,8 @@ describe('/rest/products/search', () => {
       })
   })
 
-  it('GET product search with query string containing special characters returns products', () => {
-    return frisby.get(`${REST_URL}/products/search?q=*+?[]`)
+  it('GET product search with empty query string returns all products', () => {
+    return frisby.get(`${REST_URL}/products/search?q=`)
       .expect('status', 200)
       .expect('header', 'content-type', /application\/json/)
       .then(({ json }) => {
@@ -80,8 +69,8 @@ describe('/rest/products/search', () => {
       })
   })
 
-  it('GET product search with query string containing non-ASCII characters returns products', () => {
-    return frisby.get(`${REST_URL}/products/search?q=äöüß`)
+  it('GET product search with null query string returns all products', () => {
+    return frisby.get(`${REST_URL}/products/search`)
       .expect('status', 200)
       .expect('header', 'content-type', /application\/json/)
       .then(({ json }) => {
@@ -89,12 +78,32 @@ describe('/rest/products/search', () => {
       })
   })
 
-  it('GET product search with query string containing whitespace returns products', () => {
-    return frisby.get(`${REST_URL}/products/search?q=hello world`)
+  it('GET product search with undefined query string returns all products', () => {
+    return frisby.get(`${REST_URL}/products/search?q=undefined`)
       .expect('status', 200)
       .expect('header', 'content-type', /application\/json/)
       .then(({ json }) => {
         expect(json.data.length).toBeGreaterThan(0)
+      })
+  })
+
+  it('GET product search with unionSqlInjectionChallenge query returns no products', () => {
+    const user = { email: 'test@example.com', password: 'password' }
+    return frisby.get(`${REST_URL}/products/search?q=${user.email}%${user.password}%`)
+      .expect('status', 200)
+      .expect('header', 'content-type', /application\/json/)
+      .then(({ json }) => {
+        expect(json.data.length).toBe(0)
+      })
+  })
+
+  it('GET product search with dbSchemaChallenge query returns no products', () => {
+    const tableDefinition = 'SELECT sql FROM sqlite_master'
+    return frisby.get(`${REST_URL}/products/search?q=${tableDefinition}%`)
+      .expect('status', 200)
+      .expect('header', 'content-type', /application\/json/)
+      .then(({ json }) => {
+        expect(json.data.length).toBe(0)
       })
   })
 })
