@@ -1,7 +1,6 @@
 import models = require('../models/index')
 import { type Request, type Response, type NextFunction } from 'express'
 import { UserModel } from '../models/user'
-import { QueryTypes } from 'sequelize'
 
 import * as utils from '../lib/utils'
 const challengeUtils = require('../lib/challengeUtils')
@@ -16,11 +15,9 @@ module.exports = function searchProducts () {
   return (req: Request, res: Response, next: NextFunction) => {
     let criteria: any = req.query.q === 'undefined' ? '' : req.query.q ?? ''
     criteria = (criteria.length <= 200) ? criteria : criteria.substring(0, 200)
-    const query = 'SELECT * FROM Products WHERE ((name LIKE :criteria OR description LIKE :criteria) AND deletedAt IS NULL) ORDER BY name'
-    const replacements = { criteria: `%${criteria}%` }
-    models.sequelize.query(query, {
-      replacements,
-      type: QueryTypes.SELECT
+    models.sequelize.query('SELECT * FROM Products WHERE ((name LIKE ? OR description LIKE ?) AND deletedAt IS NULL) ORDER BY name', {
+      replacements: [`%${criteria}%`, `%${criteria}%`],
+      type: models.sequelize.QueryTypes.SELECT
     })
       .then((products: any) => {
         const dataString = JSON.stringify(products)
@@ -45,9 +42,7 @@ module.exports = function searchProducts () {
         }
         if (challengeUtils.notSolved(challenges.dbSchemaChallenge)) {
           let solved = true
-          models.sequelize.query('SELECT sql FROM sqlite_master', {
-            type: QueryTypes.SELECT
-          }).then((data: any) => {
+          models.sequelize.query('SELECT sql FROM sqlite_master').then(([data]: any) => {
             const tableDefinitions = utils.queryResultToJson(data)
             if (tableDefinitions.data?.length) {
               for (let i = 0; i < tableDefinitions.data.length; i++) {
@@ -62,10 +57,8 @@ module.exports = function searchProducts () {
                 challengeUtils.solve(challenges.dbSchemaChallenge)
               }
             }
-          }).catch((error) => {
-            console.error(error)
           })
-        }
+        } 
         for (let i = 0; i < products.length; i++) {
           products[i].name = req.__(products[i].name)
           products[i].description = req.__(products[i].description)
