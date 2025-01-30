@@ -23,7 +23,7 @@ module.exports = function searchProducts () {
       type: QueryTypes.SELECT
     })
       .then((products: any) => {
-        const dataString = JSON.stringify(products) 
+        const dataString = JSON.stringify(products)
         if (challengeUtils.notSolved(challenges.unionSqlInjectionChallenge)) { // vuln-code-snippet hide-start
           let solved = true
           UserModel.findAll().then(data => {

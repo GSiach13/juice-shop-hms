@@ -60,44 +60,44 @@ jobs:
           timeout_minutes: 15
           max_attempts: 3
           command: npm run test:chromium
-  # deploy:
-  #   needs: ci
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: ssh and deploy to machine
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
-  #         username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
-  #         password: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
-  #         command_timeout: 30m
-  #         port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
-  #         script: |
-  #           cd ~/juice-shop-hms
-  #           git pull
-  #           docker stop $(docker ps -a -q)
-  #           echo "Stopped all running containers"
-  #           docker container prune
-  #           echo "Removed all containers"
-  #           docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
-  #           echo "Removed all dangling images"
-  #           docker build -t foo .
-  #           echo "Successfully built docker image!"
-  #           docker run -d -p 83.212.109.249:3001:3000 foo:latest
-  #           echo "Successfully deployed!"
-  # zap:
-  #   needs: deploy
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: ZAP Full Scan
-  #       uses: zaproxy/action-full-scan@v0.11.0
-  #       with:
-  #         target: ${{ secrets.REVAMP_SERVER_APP_IP }}
-  #         cmd_options: "-a -j"
-  #     - name: Download Report Artifact
-  #       uses: actions/download-artifact@v4
-  #     - name: Display structure of downloaded files
-  #       run: ls -R
+  deploy:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: ssh and deploy to machine
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REVAMP_SERVER_SSH_HOST }}
+          username: ${{ secrets.REVAMP_SERVER_SSH_USERNAME }}
+          password: ${{ secrets.REVAMP_SERVER_SSH_PASSWORD }}
+          command_timeout: 30m
+          port: ${{ secrets.REVAMP_SERVER_SSH_PORT }}
+          script: |
+            cd ~/juice-shop-hms
+            git pull
+            docker stop $(docker ps -a -q)
+            echo "Stopped all running containers"
+            docker container prune
+            echo "Removed all containers"
+            docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+            echo "Removed all dangling images"
+            docker build -t foo .
+            echo "Successfully built docker image!"
+            docker run -d -p 83.212.109.249:3001:3000 foo:latest
+            echo "Successfully deployed!"
+  zap:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: ZAP Full Scan
+        uses: zaproxy/action-full-scan@v0.11.0
+        with:
+          target: ${{ secrets.REVAMP_SERVER_APP_IP }}
+          cmd_options: "-a -j"
+      - name: Download Report Artifact
+        uses: actions/download-artifact@v4
+      - name: Display structure of downloaded files
+        run: ls -R
   label_issues:
     runs-on: ubuntu-latest
     permissions:
