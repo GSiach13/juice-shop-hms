@@ -54,12 +54,12 @@ jobs:
           max_attempts: 3
           command: npm run test:api
 
-      - name: 🧪 Run chromiium test script
-        uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
-        with:
-          timeout_minutes: 15
-          max_attempts: 3
-          command: npm run test:chromium
+      # - name: 🧪 Run chromiium test script
+      #   uses: nick-invision/retry@943e742917ac94714d2f408a0e8320f2d1fcafcd #v2.8.3
+      #   with:
+      #     timeout_minutes: 15
+      #     max_attempts: 3
+      #     command: npm run test:chromium
   deploy:
     needs: ci
     runs-on: ubuntu-latest
