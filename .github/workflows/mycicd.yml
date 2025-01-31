@@ -89,6 +89,9 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Verify Server is Running
+        run: |
+          curl -f ${{ secrets.REVAMP_SERVER_APP_IP }} || exit 1
       - name: ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.11.0
         with:
